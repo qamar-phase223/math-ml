@@ -14,7 +14,6 @@ def main():
     u = np.array([2, -1, 3], dtype=np.float64)
     v = np.array([4, 2, 1], dtype=np.float64)
     F = [F1, F2, F3]
-    lf = len(F)
 
     print(f"Chariot : d = {tuple(float(x) for x in d)} m")
     for ind, f in enumerate(F, start=1):
@@ -22,7 +21,7 @@ def main():
               f"|F{ind}| = {norme(f):.2f} N ; "
               f"angle = {angle_degres(f, d):.2f}°")
     print(f"Rampe : d4 = {tuple(float(x) for x in d4)} m")
-    print(f"F4 : W = {travail(F4, d4)} J ; "
+    print(f"F4 : W = {travail(F4, d4):.2f} J ; "
           f"|F4| = {norme(F4):.2f} N ; "
           f"angle = {angle_degres(F4, d4):.2f}°")
     print(f"u · v = {produit_scalaire(u, v):.2f} ; "
