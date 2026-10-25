@@ -10,33 +10,35 @@ def main():
     d4 = np.array([5, 1], dtype=np.float64)
     F1 = np.array([6, 8], dtype=np.float64)
     F2 = np.array([0, -50], dtype=np.float64)
-    F3 = np.array([-60, 0], dtype=np.float64)
+    F3 = np.array([-6, 0], dtype=np.float64)
     F4 = np.array([10, 2], dtype=np.float64)
     u = np.array([2, -1, 3], dtype=np.float64)
     v = np.array([4, 2, 1], dtype=np.float64)
-    F = [F1, F2, F3,]
+    F = [F1, F2, F3]
     lf = len(F)
 
     print(f"Chariot : d = {d} m")
-    for i in range(lf):
-        ind = i+1
-        print(f"F{ind} : W = {produit_scalaire(F[i], d):.2f} J ; "
-              f"|F{ind}| = {norme(F[i]):.2f} N ; "
-              f"angle = {angle_degres(F[i], d):.2f}°")
+    for ind, f in enumerate(F, start=1):
+        print(f"F{ind} : W = {travail(f, d):.2f} J ; "
+              f"|F{ind}| = {norme(f):.2f} N ; "
+              f"angle = {angle_degres(f, d):.2f}°")
     print(f"Rampe : d4 = {d4} m")
-    print(f"F4 : W = {produit_scalaire(F4, d4):.2f} J ; "
+    print(f"F4 : W = {travail(F4, d4)} J ; "
           f"|F4| = {norme(F4):.2f} N ; "
           f"angle = {angle_degres(F4, d4):.2f}°")
     print(f"u · v = {produit_scalaire(u, v):.2f} ; "
           f"|u| = {norme(u):.2f} ; "
           f"|v| = {norme(v):.2f} ; "
           f"angle = {angle_degres(u, v):.2f}°")
-    if produit_scalaire(u, v)**2 <= (norme(u)**2)*(norme(v)**2):
-        print(f"Cauchy-Schwarz : |u · v| = {produit_scalaire(u, v):.2f}"
-              f" <= |u| |v| = {norme(u)*norme(v):.2f} : vérifié")
+    u_v = produit_scalaire(u, v)
+    nu = norme(u)
+    nv = norme(v)
+    if u_v**2 <= (nu**2)*(nv**2):
+        print(f"Cauchy-Schwarz : |u · v| = {u_v:.2f}"
+              f" <= |u| |v| = {nu*nv:.2f} : vérifié")
     else:
-        print(f"Cauchy-Schwarz : |u · v| = {produit_scalaire(u, v):.2f}"
-              f" <= |u| |v| = {norme(u)*norme(v):.2f} : non vérifié")
+        print(f"Cauchy-Schwarz : |u · v| = {u_v:.2f}"
+              f" <= |u| |v| = {nu*nv:.2f} : non vérifié")
 
 
 if __name__ == "__main__":

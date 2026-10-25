@@ -17,7 +17,7 @@ def norme(u):
 
 
 def angle_degres(u, v):
-    """Calcule l'angle entre u et v en degres."""
+    """Calcule l'angle entre u et v en degrés."""
     u = np.array(u)
     v = np.array(v)
     if (u == 0.0).all() or (v == 0.0).all():
