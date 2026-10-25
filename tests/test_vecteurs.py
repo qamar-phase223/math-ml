@@ -14,13 +14,13 @@ u = np.array([2, -1, 3], dtype=np.float64)
 v = np.array([4, 2, 1], dtype=np.float64)
 
 
-@pytest.mark.parametrize("x, y, attendu", [
-    (F1, d, 30.00),
-    (F2, d, 00.00),
-    (u, v, 9.00)
+@pytest.mark.parametrize("x, y, attendu, tolerance", [
+    (F1, d, 30.00, None),
+    (F2, d, 00.00, 1e-9),
+    (u, v, 9.00, None)
 ])
-def test_produit_scalaire(x, y, attendu):
-    assert produit_scalaire(x, y) == pytest.approx(attendu)
+def test_produit_scalaire(x, y, attendu, tolerance):
+    assert produit_scalaire(x, y) == pytest.approx(attendu, abs=tolerance)
 
 
 def test_echec_produit_scalaire():
@@ -34,13 +34,13 @@ def test_norme():
     assert norme(F1) == pytest.approx(10.00, abs=0.01)
 
 
-@pytest.mark.parametrize("x, y, attendu", [
-    (F1, d, 53.13),
-    (F3, d, 180.00),
-    (F4, d4, 0.00)
+@pytest.mark.parametrize("x, y, attendu, tolerance", [
+    (F1, d, 53.13, 0.01),
+    (F3, d, 180.00, 0.01),
+    (F4, d4, 0.00, 1e-5)
 ])
-def test_angles_degres(x, y, attendu):
-    assert angle_degres(x, y) == pytest.approx(attendu, abs=0.01)
+def test_angles_degres(x, y, attendu, tolerance):
+    assert angle_degres(x, y) == pytest.approx(attendu, abs=tolerance)
 
 
 def test_angles_nuls_degress():
