@@ -18,9 +18,12 @@ def norme(u):
 
 def angle_degres(u, v):
     """Calcule l'angle entre u et v en degres."""
-    if norme(u) == 0.0 or norme(v) == 0.0:
+    u = np.array(u)
+    v = np.array(v)
+    if (u == 0.0).all() or (v == 0.0).all():
         raise ValueError(f"Un des vecteurs est nul : {u} ou {v}")
-    return np.acos(produit_scalaire(u, v)/(norme(u)*norme(v)))*(180/np.pi)
+    cos_theta = produit_scalaire(u, v)/(norme(u)*norme(v))
+    return np.degrees(np.arccos(np.clip(cos_theta, -1.0, 1.0)))
 
 
 def travail(F, d):
