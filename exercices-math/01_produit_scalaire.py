@@ -4,8 +4,7 @@ from vecteurs import produit_scalaire, norme, angle_degres, travail
 
 
 def main():
-    """Fonction main du script,
-    orchestrant les calculs et les tests"""
+    """Fonction main du script, orchestrant les calculs."""
     d = np.array([5, 0], dtype=np.float64)
     d4 = np.array([5, 1], dtype=np.float64)
     F1 = np.array([6, 8], dtype=np.float64)
@@ -17,12 +16,12 @@ def main():
     F = [F1, F2, F3]
     lf = len(F)
 
-    print(f"Chariot : d = {d} m")
+    print(f"Chariot : d = {tuple(float(x) for x in d)} m")
     for ind, f in enumerate(F, start=1):
         print(f"F{ind} : W = {travail(f, d):.2f} J ; "
               f"|F{ind}| = {norme(f):.2f} N ; "
               f"angle = {angle_degres(f, d):.2f}°")
-    print(f"Rampe : d4 = {d4} m")
+    print(f"Rampe : d4 = {tuple(float(x) for x in d4)} m")
     print(f"F4 : W = {travail(F4, d4)} J ; "
           f"|F4| = {norme(F4):.2f} N ; "
           f"angle = {angle_degres(F4, d4):.2f}°")
@@ -30,7 +29,7 @@ def main():
           f"|u| = {norme(u):.2f} ; "
           f"|v| = {norme(v):.2f} ; "
           f"angle = {angle_degres(u, v):.2f}°")
-    u_v = produit_scalaire(u, v)
+    u_v = abs(produit_scalaire(u, v))
     nu = norme(u)
     nv = norme(v)
     if u_v**2 <= (nu**2)*(nv**2):

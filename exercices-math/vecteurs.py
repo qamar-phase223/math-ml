@@ -7,7 +7,7 @@ def produit_scalaire(u, v):
     u = np.array(u)
     v = np.array(v)
     if u.shape != v.shape:
-        raise ValueError(f"Les vecteurs {u} et {v} n'ont pas la même taille")
+        raise ValueError(f"Les vecteurs {u} et {v} n'ont pas la même forme")
     return np.sum(u*v)
 
 
