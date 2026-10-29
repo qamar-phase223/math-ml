@@ -3,8 +3,7 @@ import pytest
 import numpy as np
 from matrices import produit_matrice_vecteur, produit_matriciel, rotation
 
-p0 = np.array((0.0, 0.0), dtype=np.float64)
-p1 = np.array((1.0, 0.0), dtype=np.float64)
+
 p2 = np.array((1.0, 1.0), dtype=np.float64)
 p3 = np.array((0.0, 1.0), dtype=np.float64)
 P = np.array([[0.0, 1.0, 1.0, 0.0], [0.0, 0.0, 1.0, 1.0]],
@@ -15,7 +14,6 @@ C = np.array([[1.0, 1.0], [0.0, 1.0]], dtype=np.float64)
 X = np.array([[1, 0, 2], [3, 1, 0], [0, 2, 1], [2, 2, 2]],
              dtype=np.float64)
 w = np.array((2.0, 3.0, 5.0), dtype=np.float64)
-RTR = produit_matriciel(R.T, R)
 A = np.array([[1.5, -2.0], [0.5, 4.0], [-3.0, 1.0]])
 B = np.array([[2.0, 0.0, -1.0, 3.5], [1.0, -2.5, 0.5, 1.0]])
 
@@ -35,7 +33,7 @@ def test_produit_matrice_vecteur(X, v, attendu):
     (E, P, np.array([[0.0, 2.0, 2.0, 0.0], [0.0, 0.0, 1.0, 1.0]])),
     (E, C, np.array([[2.0, 2.0], [0.0, 1.0]])),
     (C, E, np.array([[2.0, 1.0], [0.0, 1.0]])),
-    (RTR, R, np.array([[0.0, -1.0], [1.0, 0.0]]))
+    (R.T, R, np.eye(2))
 ], ids=["EP", "EC", "CE", "R^TR"]
 )
 def test_produit_matriciel(M, N, attendu):
@@ -43,7 +41,7 @@ def test_produit_matriciel(M, N, attendu):
 
 
 def test_concordance_numpy():
-    assert produit_matriciel(A, B) == pytest.approx(A@B)
+    assert produit_matriciel(A, B) == pytest.approx(A@B, abs=1e-12)
 
 
 @pytest.mark.parametrize("angle, attendu", [
@@ -52,7 +50,7 @@ def test_concordance_numpy():
 ], ids=["rotation(90)", "rotation(0.0)"]
 )
 def test_rotation(angle, attendu):
-    assert rotation(angle) == pytest.approx(attendu)
+    assert rotation(angle) == pytest.approx(attendu, abs=1e-12)
 
 
 def test_non_commutativite():
@@ -60,7 +58,8 @@ def test_non_commutativite():
 
 
 def test_composition_rotation():
-    assert produit_matriciel(rotation(30), rotation(60)) == pytest.approx(rotation(90))
+    assert produit_matriciel(rotation(30), rotation(60)
+                             ) == pytest.approx(rotation(90), abs=1e-12)
 
 
 def test_exception1():
