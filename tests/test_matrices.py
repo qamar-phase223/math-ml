@@ -63,16 +63,16 @@ def test_composition_rotation():
     assert produit_matriciel(rotation(30), rotation(60)) == pytest.approx(rotation(90))
 
 
-def exception1():
+def test_exception1():
     with pytest.raises(ValueError):
         produit_matrice_vecteur(X, np.array([1.0, 2.0]))
 
 
-def exception2():
+def test_exception2():
     with pytest.raises(ValueError):
         produit_matrice_vecteur(X, w.reshape(3, 1))
 
 
-def exception3():
+def test_exception3():
     with pytest.raises(ValueError):
         produit_matriciel(E, X)
