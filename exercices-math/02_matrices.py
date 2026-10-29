@@ -48,24 +48,24 @@ def main():
     print(f"E(Cp2) = {formater_vecteur(E_Cp2)}")
 
     CE_p2 = produit_matrice_vecteur(CE, p2)
-    print(f"(CE)p2 = {CE_p2}")
+    print(f"(CE)p2 = {formater_vecteur(CE_p2)}")
 
-    print("\nD. Transposées et rotations")
+    print("\nD. Transposée et rotations")
     RTR = produit_matriciel(R.T, R)
     afficher_matrice("R^T R", RTR)
 
     RR = produit_matriciel(R, R)
     afficher_matrice("RR", RR)
 
-    print(f"rotation(90) = R: {formater_bool(np.allclose(R, rotation(90)))}")
+    print(f"rotation(90) = R : {formater_bool(np.allclose(R, rotation(90)))}")
     print(f"|p2| = {norme(p2):.2f} ; |Rp2| = {norme(Rp2):.2f}")
 
     print("\nE. Énergie consommée par jour")
     Xw = produit_matrice_vecteur(X, w)
     print(f"Formes : X {X.shape} ; w {w.shape} ; Xw {Xw.shape}")
     for i, val in enumerate(Xw, start=1):
-        print(f"Jour {i} : {val} kWh")
-    print(f"Total : {Xw.sum()} kWh")
+        print(f"Jour {i} : {val:.2f} kWh")
+    print(f"Total : {Xw.sum():.2f} kWh")
 
 
 def formater_nombre(x):
