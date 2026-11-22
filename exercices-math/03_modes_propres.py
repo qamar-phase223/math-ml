@@ -65,6 +65,8 @@ def main():
     except ValueError:
         print(f"R : lambda = aucune valeur réelle | "
               f"sigma = {formater_couple(valeurs_singulieres(R))}")
+    else:
+        print("R : anomalie car valeurs propres réelles inattendues")
     lamAs = valeurs_propres(A_s)
     sigmaAs = valeurs_singulieres(A_s)
     lamA = valeurs_propres(A)
