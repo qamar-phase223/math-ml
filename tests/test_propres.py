@@ -5,13 +5,13 @@ from propres import est_symetrique, matrice_raideur, valeurs_propres
 from propres import vecteur_propre, valeurs_singulieres, pulsations
 from vecteurs import produit_scalaire, norme
 
-
+# kXY = kX du système Y
 k11, k12, k1L = 3.0, 1.0, 3.0
 k21, k22, k2L = 1.0, 2.0, 1.0
 k31, k32, k3L = 3.0, 4.0, 3.0
 m1, m1L = 1.0, 4.0
-K1 = matrice_raideur(k11, k21, k31)
-K2 = matrice_raideur(k12, k22, k32)
+K1 = np.array([[4.0, -1.0], [-1.0, 4.0]], dtype="float64")
+K2 = np.array([[3.0, -2.0], [-2.0, 6.0]], dtype="float64")
 A = np.array([[4.0, 0.0], [3.0, -5.0]], dtype="float64")
 A_s = np.array([[9.0, -3.0], [-3.0, 1.0]], dtype="float64")
 R = np.array([[0.0, -1.0], [1.0, 0.0]], dtype="float64")
@@ -21,7 +21,7 @@ D = np.array([[2.0, 0.0], [0.0, 5.0]], dtype="float64")
 @pytest.mark.parametrize("x, y, z, attendu", [
     (k11, k21, k31, np.array([[4, -1], [-1, 4]], dtype="float64")),
     (k12, k22, k32, np.array([[3, -2], [-2, 6]], dtype="float64")),
-], ids=["Système 1", "Système 2"]
+], ids=["Systeme 1", "Systeme 2"]
 )
 def test_matrice_raideur(x, y, z, attendu):
     assert matrice_raideur(x, y, z) == pytest.approx(attendu, abs=1e-12)
@@ -30,7 +30,7 @@ def test_matrice_raideur(x, y, z, attendu):
 @pytest.mark.parametrize("matrice, attendu", [
     (K1, True),
     (A, False)
-], ids=["Symétrie K1", "Symétrie A"]
+], ids=["Symetrie K1", "Symetrie A"]
 )
 def test_symetrie(matrice, attendu):
     assert est_symetrique(matrice) is attendu
