@@ -93,5 +93,3 @@ def pulsations(k1, k2, k3, m):
     lam1, lam2 = valeurs_propres(K)
     w1, w2 = np.sqrt(lam1/m), np.sqrt(lam2/m)
     return np.array([w1, w2])
-
-
