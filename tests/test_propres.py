@@ -86,12 +86,14 @@ def test_pulsations(k1, k2, k3, m, attendu):
 
 def test_concordance1():
     """valeurs_propres(K2) égale np.linalg.eigvalsh(K2)."""
-    assert valeurs_propres(K2) == pytest.approx(np.linalg.eigvalsh(K2), abs=1e-12)
+    lambdas = np.linalg.eigvalsh(K2)
+    assert valeurs_propres(K2) == pytest.approx(lambdas, abs=1e-12)
 
 
 def test_concordance2():
     """valeurs_singulieres(A) égale np.linalg.svd(A)."""
-    assert valeurs_singulieres(A) == pytest.approx(np.linalg.svd(A, compute_uv=False), abs=1e-12)
+    sigmas = np.linalg.svd(A, compute_uv=False)
+    assert valeurs_singulieres(A) == pytest.approx(sigmas, abs=1e-12)
 
 
 def test_exception1():
